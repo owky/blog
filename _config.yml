@@ -30,7 +30,6 @@ github_username:  owky
 
 # Build settings
 theme: minima
-google_analytics: G-PCCR1QM5EE
 plugins:
   - jekyll-feed
 
