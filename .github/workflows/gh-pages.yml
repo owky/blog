@@ -29,11 +29,7 @@ jobs:
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
-          text: Blog updated. https://owky.github.io/blog/
-          attachments: |
-            [{
-              "fields": [
-                {"title": "Commit Message", "value": "${{github.event.head_commit.message}}" },
-                {"title": "GitHub Action", "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}" },
-              ]
-            }]
+          text: |
+            Blog updated. https://owky.github.io/blog/
+            Commit Message: ${{github.event.head_commit.message}}
+            GitHub Action: ${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}
