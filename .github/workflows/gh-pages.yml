@@ -14,12 +14,11 @@ jobs:
         uses: actions/setup-ruby@v1
         with:
           ruby-version: 2.7
-      - name: bundle install
+      - name: jekyll build
         run: |
           bundle config set path 'vendor/bundle'
           bundle install
-      - name: Jekyll Build
-        run: bundle exec jekyll build
+          bundle exec jekyll build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -30,4 +29,11 @@ jobs:
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
-          text: Hello, Slack!
+          text: Blog updated. https://owky.github.io/blog/
+          attachments: |
+            [{
+              "fields": [
+                {"title": "Commit Message", "value": "${{github.event.head_commit.message}}" },
+                {"title": "GitHub Action", "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}" },
+              ]
+            }]
