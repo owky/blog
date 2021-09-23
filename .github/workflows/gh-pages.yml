@@ -10,13 +10,21 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+      - name: bundle install
+        run: |
+          bundle config set path 'vendor/bundle'
+          bundle install
+      - name: Jekyll Build
+        run: bundle exec jekyll build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          personal_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
-          enable_jekyll: true
-
       - name: Slack Notification
         uses: tokorom/action-slack-incoming-webhook@main
         env:
