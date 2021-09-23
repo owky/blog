@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>開発計画とその進捗管理、そして開発チームに求めること | owky’s blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="開発計画とその進捗管理、そして開発チームに求めること" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="開発計画の管理を開発チームに権限委譲するにあたって、いろいろと考えを整理した。 これは私のチームの、我々のプロダクトのやり方であるので一般的なベストプラクティスとは限らない。" />
+<meta property="og:description" content="開発計画の管理を開発チームに権限委譲するにあたって、いろいろと考えを整理した。 これは私のチームの、我々のプロダクトのやり方であるので一般的なベストプラクティスとは限らない。" />
+<link rel="canonical" href="/blog/2021/09/19/agile-planning-and-sprint-and-team.html" />
+<meta property="og:url" content="/blog/2021/09/19/agile-planning-and-sprint-and-team.html" />
+<meta property="og:site_name" content="owky’s blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-19T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="開発計画とその進捗管理、そして開発チームに求めること" />
+<script type="application/ld+json">
+{"description":"開発計画の管理を開発チームに権限委譲するにあたって、いろいろと考えを整理した。 これは私のチームの、我々のプロダクトのやり方であるので一般的なベストプラクティスとは限らない。","url":"/blog/2021/09/19/agile-planning-and-sprint-and-team.html","headline":"開発計画とその進捗管理、そして開発チームに求めること","@type":"BlogPosting","dateModified":"2021-09-19T00:00:00+00:00","datePublished":"2021-09-19T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2021/09/19/agile-planning-and-sprint-and-team.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="owky's blog" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">owky&#39;s blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">開発計画とその進捗管理、そして開発チームに求めること</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-09-19T00:00:00+00:00" itemprop="datePublished">Sep 19, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>開発計画の管理を開発チームに権限委譲するにあたって、いろいろと考えを整理した。
+これは私のチームの、我々のプロダクトのやり方であるので一般的なベストプラクティスとは限らない。</p>
+
+<ul>
+  <li>開発計画とその進捗管理とは何なのか</li>
+  <li>段階的に詳細化しアジャイルに管理すること</li>
+  <li>開発チームのスプリントへの向き合い方として求めること</li>
+</ul>
+
+<h2 id="開発計画とその進捗管理">開発計画とその進捗管理</h2>
+
+<p>開発チームは、プロダクトが生み出す価値をユーザーが実際に享受できる形で実現することを責務として負う。</p>
+
+<p><strong>開発計画</strong>とは、その価値がいつデリバリーされるかというコミットメントである。
+プロダクトのビジネス戦略と開発計画は密接な関係を持ち、開発計画を前提にビジネスは進むし、ビジネス戦略が変われば開発計画も変更する。
+ビジネス戦略と開発計画のどちらとも、柔軟性を持つ必要があるし、その進捗は繰り返し評価されるべきだ。</p>
+
+<p><strong>開発計画の進捗確認</strong>とは、計画の達成に向けて開発が順調に進んでいるのかを客観的に評価することである。
+あとどれくらいでゴールに着くか？なので、「時間 ＝ 道のり ÷ 速さ」と同じように考えられる。</p>
+
+<p>時間 → あとどれくらいで予定した開発が終わるか<br />
+道のり → 予定した開発が完了するまでの全タスク量<br />
+速さ → 1スプリントあたりのベロシティ</p>
+
+<p>道のりと速さで進捗の評価は決まるので、道のりと速さの妥当性は繰り返し確かめる。</p>
+
+<ul>
+  <li>予定しているタスクは本当に全部なのか？</li>
+  <li>見直した方がよい見積りはないか？</li>
+  <li>ベロシティは安定しているか？</li>
+</ul>
+
+<h2 id="段階的に詳細化しアジャイルに管理する">段階的に詳細化しアジャイルに管理する</h2>
+
+<p>開発計画は、その解像度が段階的に高くなるように、4つのスコープに分けて管理する。</p>
+
+<ul>
+  <li>年間計画 (1年のスコープ)</li>
+  <li>バージョン (2〜4ヶ月のスコープ)</li>
+  <li>機能 (2週間〜2ヶ月のスコープ)</li>
+  <li>スプリント (1〜2週間のスコープ)</li>
+</ul>
+
+<p>スプリントの計画は最も解像度が高く信頼できるものである。
+そしてその実績は、より解像度の低いスコープの計画(機能・バージョン・年間)を見直すための材料となる。</p>
+
+<p>2週間のスプリントで予定した作業が予定通りに終わらなかった場合、現在の計画は理想的な進捗を期待し過ぎているかもしれない。また、新しく使う技術の調査を行ったところ懸念点が解消されたという場合、大きめにしていた見積もりを見直すことで、より早く機能を届けられる計画となる。</p>
+
+<p>実績から得た学びを計画にフィードバックしていく。</p>
+
+<h2 id="開発チームのスプリントへの向き合い方">開発チームのスプリントへの向き合い方</h2>
+
+<p>スプリントにおける作業は、開発チームにとって扱いやすいサイズに細分化されている。
+そのため、開発チームにはスプリントの計画とその達成についてコミットメントを求める。
+具体的には</p>
+
+<ul>
+  <li>ベロシティを安定させること</li>
+  <li>見積もりに自信が無いものから進めること</li>
+</ul>
+
+<p>を考えながら開発に取り組んでほしい。</p>
+
+<p>ベロシティが安定しているというのは、チームが一定の走さで走り続けることができるということなので「時間 ＝ 道のり ÷ 速さ」で求めた計画の精度が高くなる。
+より速く走る(ベロシティを上げる)にはどうするか？と考えたくなるかもしれないが、そうではなく、一定のペースで走ることを阻害する要因を排除することを考えてほしい。
+そうすると、今よりも速いペースで走れるようになる。</p>
+
+<p>見積もりに自信が無い作業には不確実性が隠れている。あまり触ったことがないモジュールを修正するので思ったより時間がかかるかもしれないとか、この機能はテストをするのに特別なツールが必要だがその使い方に手間取るかもしれないとか。こういうものは計画の達成におけるリスクになるので、早く対処できるほど計画の達成確率は上がる。後回しにしたりすると取り返しのつかない状況に追い込まれたりする(休日出勤してのリカバリとか)。このような不確実性を効率よく解消する方法は、さっさとその作業に取り掛かることである。</p>
+
+  </div><a class="u-url" href="/blog/2021/09/19/agile-planning-and-sprint-and-team.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">owky&#39;s blog</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">owky&#39;s blog</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/owky"><svg class="svg-icon"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg> <span class="username">owky</span></a></li><li><a href="https://www.twitter.com/owky2413"><svg class="svg-icon"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">owky2413</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>チームマネジメントとかプロダクトマネジメントとかエンジニアリングマネジメントについて 学んだこと、感じたことを記録に残しています。 Team Management / Product Management / Engineering Management / Lean / Agile / Scrum</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

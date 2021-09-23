@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog/" rel="alternate" type="text/html" /><updated>2021-09-23T14:01:37+00:00</updated><id>/blog/feed.xml</id><title type="html">owky’s blog</title><subtitle>チームマネジメントとかプロダクトマネジメントとかエンジニアリングマネジメントについて 学んだこと、感じたことを記録に残しています。 Team Management / Product Management / Engineering Management / Lean / Agile / Scrum</subtitle><entry><title type="html">開発計画とその進捗管理、そして開発チームに求めること</title><link href="/blog/2021/09/19/agile-planning-and-sprint-and-team.html" rel="alternate" type="text/html" title="開発計画とその進捗管理、そして開発チームに求めること" /><published>2021-09-19T00:00:00+00:00</published><updated>2021-09-19T00:00:00+00:00</updated><id>/blog/2021/09/19/agile-planning-and-sprint-and-team</id><content type="html" xml:base="/blog/2021/09/19/agile-planning-and-sprint-and-team.html">&lt;p&gt;開発計画の管理を開発チームに権限委譲するにあたって、いろいろと考えを整理した。
+これは私のチームの、我々のプロダクトのやり方であるので一般的なベストプラクティスとは限らない。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;開発計画とその進捗管理とは何なのか&lt;/li&gt;
+  &lt;li&gt;段階的に詳細化しアジャイルに管理すること&lt;/li&gt;
+  &lt;li&gt;開発チームのスプリントへの向き合い方として求めること&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;開発計画とその進捗管理&quot;&gt;開発計画とその進捗管理&lt;/h2&gt;
+
+&lt;p&gt;開発チームは、プロダクトが生み出す価値をユーザーが実際に享受できる形で実現することを責務として負う。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;開発計画&lt;/strong&gt;とは、その価値がいつデリバリーされるかというコミットメントである。
+プロダクトのビジネス戦略と開発計画は密接な関係を持ち、開発計画を前提にビジネスは進むし、ビジネス戦略が変われば開発計画も変更する。
+ビジネス戦略と開発計画のどちらとも、柔軟性を持つ必要があるし、その進捗は繰り返し評価されるべきだ。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;開発計画の進捗確認&lt;/strong&gt;とは、計画の達成に向けて開発が順調に進んでいるのかを客観的に評価することである。
+あとどれくらいでゴールに着くか？なので、「時間 ＝ 道のり ÷ 速さ」と同じように考えられる。&lt;/p&gt;
+
+&lt;p&gt;時間 → あとどれくらいで予定した開発が終わるか&lt;br /&gt;
+道のり → 予定した開発が完了するまでの全タスク量&lt;br /&gt;
+速さ → 1スプリントあたりのベロシティ&lt;/p&gt;
+
+&lt;p&gt;道のりと速さで進捗の評価は決まるので、道のりと速さの妥当性は繰り返し確かめる。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;予定しているタスクは本当に全部なのか？&lt;/li&gt;
+  &lt;li&gt;見直した方がよい見積りはないか？&lt;/li&gt;
+  &lt;li&gt;ベロシティは安定しているか？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;段階的に詳細化しアジャイルに管理する&quot;&gt;段階的に詳細化しアジャイルに管理する&lt;/h2&gt;
+
+&lt;p&gt;開発計画は、その解像度が段階的に高くなるように、4つのスコープに分けて管理する。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;年間計画 (1年のスコープ)&lt;/li&gt;
+  &lt;li&gt;バージョン (2〜4ヶ月のスコープ)&lt;/li&gt;
+  &lt;li&gt;機能 (2週間〜2ヶ月のスコープ)&lt;/li&gt;
+  &lt;li&gt;スプリント (1〜2週間のスコープ)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;スプリントの計画は最も解像度が高く信頼できるものである。
+そしてその実績は、より解像度の低いスコープの計画(機能・バージョン・年間)を見直すための材料となる。&lt;/p&gt;
+
+&lt;p&gt;2週間のスプリントで予定した作業が予定通りに終わらなかった場合、現在の計画は理想的な進捗を期待し過ぎているかもしれない。また、新しく使う技術の調査を行ったところ懸念点が解消されたという場合、大きめにしていた見積もりを見直すことで、より早く機能を届けられる計画となる。&lt;/p&gt;
+
+&lt;p&gt;実績から得た学びを計画にフィードバックしていく。&lt;/p&gt;
+
+&lt;h2 id=&quot;開発チームのスプリントへの向き合い方&quot;&gt;開発チームのスプリントへの向き合い方&lt;/h2&gt;
+
+&lt;p&gt;スプリントにおける作業は、開発チームにとって扱いやすいサイズに細分化されている。
+そのため、開発チームにはスプリントの計画とその達成についてコミットメントを求める。
+具体的には&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;ベロシティを安定させること&lt;/li&gt;
+  &lt;li&gt;見積もりに自信が無いものから進めること&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;を考えながら開発に取り組んでほしい。&lt;/p&gt;
+
+&lt;p&gt;ベロシティが安定しているというのは、チームが一定の走さで走り続けることができるということなので「時間 ＝ 道のり ÷ 速さ」で求めた計画の精度が高くなる。
+より速く走る(ベロシティを上げる)にはどうするか？と考えたくなるかもしれないが、そうではなく、一定のペースで走ることを阻害する要因を排除することを考えてほしい。
+そうすると、今よりも速いペースで走れるようになる。&lt;/p&gt;
+
+&lt;p&gt;見積もりに自信が無い作業には不確実性が隠れている。あまり触ったことがないモジュールを修正するので思ったより時間がかかるかもしれないとか、この機能はテストをするのに特別なツールが必要だがその使い方に手間取るかもしれないとか。こういうものは計画の達成におけるリスクになるので、早く対処できるほど計画の達成確率は上がる。後回しにしたりすると取り返しのつかない状況に追い込まれたりする(休日出勤してのリカバリとか)。このような不確実性を効率よく解消する方法は、さっさとその作業に取り掛かることである。&lt;/p&gt;</content><author><name></name></author><summary type="html">開発計画の管理を開発チームに権限委譲するにあたって、いろいろと考えを整理した。 これは私のチームの、我々のプロダクトのやり方であるので一般的なベストプラクティスとは限らない。</summary></entry><entry><title type="html">組織の課題解決にもっと時間をかけたいので、開発プロジェクトの計画づくりと進捗管理を権限移譲する</title><link href="/blog/2021/08/29/delegate-project-management.html" rel="alternate" type="text/html" title="組織の課題解決にもっと時間をかけたいので、開発プロジェクトの計画づくりと進捗管理を権限移譲する" /><published>2021-08-29T00:00:00+00:00</published><updated>2021-08-29T00:00:00+00:00</updated><id>/blog/2021/08/29/delegate-project-management</id><content type="html" xml:base="/blog/2021/08/29/delegate-project-management.html">&lt;p&gt;開発組織のマネージャーとして、求められていること(ミッション)がとても多い。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;年間の開発計画の策定&lt;/li&gt;
+  &lt;li&gt;開発計画の実現のためのプロジェクト管理&lt;/li&gt;
+  &lt;li&gt;開発組織の生産性の向上&lt;/li&gt;
+  &lt;li&gt;開発成果物の品質の改善&lt;/li&gt;
+  &lt;li&gt;エンジニアの採用・評価&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;弊社のマネージャー職はなんでも屋なので、担当するプロダクトや組織のあらゆる課題をなんとかするのが仕事になる。Product Manager とか Project Manager とか Engineering Manager とか、マネージャーの役割が細分化されている組織だと、より自身のミッションに集中しやすく、成果も出しやすいんだろうか。&lt;/p&gt;
+
+&lt;p&gt;さて、やることが多くて大変ではあるものの、どれも自分にとっては手応えのあるミッションであり、それなりに前向きに取り組んでいる。
+そうは言っても、1日は平等に24時間しかないないため、やはり時間は足りなくなる。
+どうしても “薄く広く” といった進め方になってしまい、なかなかゴールに近づけない、結果を出せないというストレスを感じている。&lt;/p&gt;
+
+&lt;p&gt;時間が足りないと感じたら、権限移譲を考えるべきだ。&lt;/p&gt;
+
+&lt;p&gt;直近の1ヶ月で最も時間を取られていたタスクは、開発プロジェクトの計画づくりと進捗管理だった。
+開発チームが用意したタスク一覧に見積りを入れてもらったり、見積りを元にスケジュールを作ったり、スケジュールに対する進捗状況を確認したり、そもそもタスク一覧・見積り・スケジュールの妥当性を確認したり、といった作業だ。
+5〜7のサブチームからなるほどの開発規模であるため、それなりの時間が取られてしまう。
+やり方は確立されているし、個人的には食傷気味な作業だったので、これからは開発チームの方で進められるように、権限移譲を進めていきたい。&lt;/p&gt;
+
+&lt;p&gt;これで、生産性や品質の改善というところに、より時間を割くことができるようになることに期待する。&lt;/p&gt;</content><author><name></name></author><summary type="html">開発組織のマネージャーとして、求められていること(ミッション)がとても多い。</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="/blog/jekyll/update/2021/08/25/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2021-08-25T02:32:26+00:00</published><updated>2021-08-25T02:32:26+00:00</updated><id>/blog/jekyll/update/2021/08/25/welcome-to-jekyll</id><content type="html" xml:base="/blog/jekyll/update/2021/08/25/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;Jekyll requires blog post files to be named according to the following format:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YEAR-MONTH-DAY-title.MARKUP&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YEAR&lt;/code&gt; is a four-digit number, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MONTH&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DAY&lt;/code&gt; are both two-digit numbers, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MARKUP&lt;/code&gt; is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry></feed>
