@@ -32,6 +32,7 @@ github_username:  owky
 theme: minima
 plugins:
   - jekyll-feed
+google_analytics: G-PCCR1QM5EE
 
 # Exclude from processing.
 # The following items will not be processed, by default.
