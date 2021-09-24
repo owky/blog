@@ -6,13 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
         <link rel="stylesheet" type="text/css" href="https://rawgit.com/outboxcraft/beauter/master/beauter.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/blog/assets/css/my-blog.css">
 
-        <style type="text/css">
-         h1 { font-size: 3.6rem; }
-         h2 { font-size: 3.0rem; }
-         h3 { font-size: 2.4rem; }
-         h4 { font-size: 1.5rem; }
-        </style>
+        {%- if jekyll.environment == 'production' and site.google_analytics -%}
+          {% include google-analytics.html %}
+        {%- endif -%}
     </head>
 
     <body>

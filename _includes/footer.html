@@ -1,15 +1,12 @@
-<div style="background: linear-gradient(white, #fff0f3)">
-    <div class="container" style="padding-top: 7rem;">
+<footer>
+    <div class="container">
         <div class="row">
             <div class="col m4">
-                <p>{{ site.title }}</p>
+                {% include profile.html %}
             </div>
             <div class="col m8">
-                <small>
-                    チームマネジメントとかプロダクトマネジメントとかエンジニアリングマネジメントについて 学んだこと、感じたことを記録に残しています。<br>
-                    Team Management / Product Management / Engineering Management / Lean / Agile / Scrum</p>
-                </small>
+                {% include description.html %}
             </div>
         </div>
     </div>
-</div>
+</footer>

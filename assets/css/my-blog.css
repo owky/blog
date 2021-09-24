@@ -1,0 +1,27 @@
+h1 { font-size: 3.6rem; }
+h2 { font-size: 3.0rem; }
+h3 { font-size: 2.4rem; }
+h4 { font-size: 1.5rem; }
+a {
+    color: #003388;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+a.blog-title {
+    color: black;
+}
+img.social-icon {
+    width: 1em;
+    vertical-align: middle;
+    margin-right: 0.5em;
+}
+header {
+    background: linear-gradient(#fff0f3, white);
+    margin-bottom: 3rem;
+}
+footer {
+    background: linear-gradient(white, #fff0f3);
+    padding-top: 7rem;
+}
