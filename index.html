@@ -1,0 +1,17 @@
+---
+layout: default
+---
+<div class="container">
+    {% for post in site.posts %}
+        <p>
+            <small>
+                {{ post.date | date: "%b %-d, %Y" }}
+            </small>
+            <br>
+            <a href="{{ post.url | relative_url }}">
+                {{ post.title }}
+            </a>
+        </p>
+    {% endfor %}
+</div>
+
