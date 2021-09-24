@@ -7,9 +7,11 @@
     </head>
 
     <body>
-        {% include header.html %}
-        {{ content }}
-        <hr>
-        {% include footer.html %}
+        <div class="container">
+            {% include header.html %}
+            {{ content }}
+            <hr>
+            {% include footer.html %}
+        </div>
     </body>
 </html>
