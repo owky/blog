@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <title>owky's blog</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <link rel="stylesheet" type="text/css" href="https://rawgit.com/outboxcraft/beauter/master/beauter.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/blog/assets/css/my-blog.css"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PCCR1QM5EE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PCCR1QM5EE');
+</script>
+</head>
+
+    <body>
+        <header>
+    <div class="jumbo _high">
+        <p class="_high"><strong>
+            <a class="blog-title" href="/blog/">
+                owky's blog
+            </a>
+        </strong></p>
+    </div>
+</header>
+
+        <div class="container">
+    <h1>ワンタッチでミュートを解除してTeams会議に戻るボタンを作る</h1>
+    <p class="_low">Dec 28, 2021</p>
+    <p><p>用意するもの</p>
+
+<ul>
+  <li>Touch Bar付きのMacbook Pro</li>
+  <li>Microsoft Teams</li>
+</ul>
+
+<p>Web会議の最中に別のアプリを開いて作業していて、急に呼びかけられて発言しないといけないということがよくある。
+このときに、ミュートを解除する操作がけっこう手間である。そこで「押すだけでいつでもミュートを解除して会議に戻れる」ボタンをTouch Barに常に表示しておく。これでいつでもどこでもワンタッチで会議に戻って発言できる。</p>
+
+<p>Microsoft Teamsの場合、Web会議中に別アプリにフォーカスを移すと、右下にTeamsの小画面が表示されるようになる。
+この小画面の中のミュートボタンにマウスカーソルを合わせて押すというのが、咄嗟にやろうとすると結構だるい。
+もしくは、Teamsの画面に戻って “Cmd + Shift + M” のショートカットでミュートを解除するか。これもだるい。
+この操作に手間取って発言するのが遅れたりすると「聞いてなかったのかな？」と思われそうなのも嫌だ。というのがモチベーション。</p>
+
+<h3 id="automatorでteamsのミュートを解除するクイックアクションを作成する">AutomatorでTeamsのミュートを解除するクイックアクションを作成する</h3>
+
+<p>Teamsアプリを開いてショートカットキーでミュートを解除する。というのをApple Scriptで実現できる。
+操作のフィードバックが欲しいので “Unmute.” と喋らせているが、これは無くても良い。
+Automatorを使ってクイックアクションとして保存すると、macのシステムから呼び出すことができる。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tell application "Microsoft Teams"
+	activate
+	say "Unmute."
+	tell application "System Events"
+		keystroke "m" using {command down, shift down}
+	end tell
+end tell
+</code></pre></div></div>
+
+<p><img src="https://res.cloudinary.com/owky/9EDA35FD-DEAF-45FE-B4BE-207A5298CAC8_k1sm6a.jpg" alt="Automator" /></p>
+
+<h3 id="作成したクイックアクションをtouch-barに表示する">作成したクイックアクションをTouch Barに表示する</h3>
+
+<p>システム環境設定の「キーボード」設定に「Touch Barに登録する項目」があるので、それを「クイックアクション」に設定する。
+そうすると、先に登録していたクイックアクションが常にTouch Barに表示されるようになる。</p>
+
+<p><img src="https://res.cloudinary.com/owky/1685D168-537E-42E7-9242-9E238648F0E7_in0qw2.jpg" alt="システム環境設定 - キーボード" /></p>
+
+<p><img src="https://res.cloudinary.com/owky/80C1B587-CB58-46A3-838A-12EAC53B89C4_f5sksc.jpg" alt="Touch Bar" /></p>
+
+<p>これを押すだけでミュート解除された状態で会議に戻れる！
+隣に表示されている「Teams会議を終了」というのも同様に自作したクイックアクション。</p>
+
+<h3 id="キーボードショートカットからクイックアクションを呼び出すこともできる">キーボードショートカットからクイックアクションを呼び出すこともできる</h3>
+
+<p>システム環境設定の「キーボード」設定の「ショートカット」から「サービス」を選ぶと、一番下に登録したクイックアクションが確認できる。そこでショートカットキーを設定できる。
+結果としては、グローバルなショートカットキーでいい感じのものが思いつかなかったので、Touch Barという方式を選んだ。</p>
+</p>
+</div>
+
+        <hr>
+        <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col m4">
+                <p>
+    <a class="blog-title" href="/blog/">
+        owky's blog
+    </a>
+</p>
+<p>
+    <a href="https://github.com/owky">
+        <img src="/blog/assets/img/github.png"
+             class="social-icon">owky
+    </a>
+    <br>
+    <a href="https://twitter.com/owky2413">
+        <img src="/blog/assets/img/twitter.png"
+             class="social-icon">owky2413
+    </a>
+</p>
+
+            </div>
+            <div class="col m8">
+                <small>
+    チームマネジメントとかプロダクトマネジメントとかエンジニアリングマネジメントについて 学んだこと、感じたことを記録に残しています。
+    <br>
+    Team Management / Product Management / Engineering Management / Lean / Agile / Scrum
+</small>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </body>
+</html>
