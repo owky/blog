@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <title>owky's blog</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <link rel="stylesheet" type="text/css" href="https://rawgit.com/outboxcraft/beauter/master/beauter.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/blog/assets/css/my-blog.css"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PCCR1QM5EE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PCCR1QM5EE');
+</script>
+</head>
+
+    <body>
+        <header>
+    <div class="jumbo _high">
+        <p class="_high"><strong>
+            <a class="blog-title" href="/blog/">
+                owky's blog
+            </a>
+        </strong></p>
+    </div>
+</header>
+
+        <div class="container">
+    <h1>iPad上でのブログ執筆環境としてcode-serverを試したが文字入力まわりの不具合がしんどかった。</h1>
+    <p class="_low">Jan 8, 2022</p>
+    <p><p>iPadでのブログ執筆環境を模索している。今回は<a href="https://github.com/coder/code-server">code-server</a>を試した感想。</p>
+
+<p>このブログはサイトジェネレーターとしてjekyllを使っており、GitHubでソースを管理して、GitHub Pagesで公開している。記事を書いて公開するまでは以下のような手順になる。</p>
+
+<ol>
+  <li>markdown形式で記事を書く</li>
+  <li><code class="language-plaintext highlighter-rouge">jekyll build</code>でプレビューしてチェックする</li>
+  <li>GitHubにpushする → 自動で公開される</li>
+</ol>
+
+<p>iPad上でこれらの操作を、楽しく・ストレスなく実行できる環境を模索している。</p>
+
+<h2 id="code-server">code-server</h2>
+
+<p><a href="https://github.com/coder/code-server">code-server</a>はブラウザから利用できるVisual Studio Codeであり、サーバーアプリケーションとしてオンプレミスで構築できる。Visual Studio Codeはターミナルも備えているため、エディタとして記事が書けるだけでなく、jekyllのビルドができて、GitHubへのpushもできる。とても高機能で使いやすいエディタだ。</p>
+
+<p>自宅のubuntuサーバーにcode-serverを立てて、iPadからアクセスすると、iPadのブラウザ上でVisual Studio Codeを利用することができる。プレビューのチェックもブラウザから行うので、iPad上では一つのアプリの中で執筆から公開まで完結できるのが良い。</p>
+
+<p>ただし、いくつかの不具合に悩まされた。</p>
+
+<h3 id="日本語が重複入力されてしまう">日本語が重複入力されてしまう</h3>
+<p>日本語入力モードで<code class="language-plaintext highlighter-rouge">a</code>を入力すると「あ」が変換未確定の状態で表示され、変換候補が出てくる。<code class="language-plaintext highlighter-rouge">Enter</code>を入力すると変換が確定され「あ」が入力された状態になる。ここで改行しようと再度<code class="language-plaintext highlighter-rouge">Enter</code>を入力すると、なぜかもう一つ「あ」が入力されて「ああ」になってしまう。これが不具合。主に文末に読点「。」を入力して改行するという場面で発生する。。 (←こうなる)</p>
+
+<p>Windowsからだと発生せず、iPadOSまたはiOSからだと発生する。おそらく、iOS・iPadOSの日本語変換の仕組みと相性が悪いのだろう。</p>
+
+<p>結構な頻度で発生し、その度に文章を修正しないといけないので、地味にストレスが溜まる。</p>
+
+<h3 id="別のアプリに移ってから戻ってくるとキーボード入力ができなくなる場合がある">別のアプリに移ってから戻ってくるとキーボード入力ができなくなる場合がある</h3>
+
+<p>Slackに書いていたメモをコピーしてきたりとか、集中が切れてTwitterを見に行ったりとか、執筆中に別アプリに移動して戻ってくるというのはよくある操作だ。その際に、入力フォーカスは表示されているのに入力を受け付けてくれない症状に陥ることがある。</p>
+
+<p>これはGitHubにIssueが登録されていた。</p>
+
+<p><a href="https://github.com/coder/code-server/issues/4182">iPad pro editor lose focus after swipping back from safari browser · Issue #4182 · coder/code-server</a></p>
+
+<p>Issueは解決されてないが、iPadの使い勝手を改善するためのマイルストーンを計画しているようで、そこにリストアップされている。</p>
+
+<p><a href="https://github.com/coder/code-server/milestone/31">4.1.0 - improve iPad UX Milestone</a></p>
+<blockquote>
+  <p>The goal of this milestone is to improve the UX for iPad users.</p>
+</blockquote>
+
+<p>この不具合もそれなりの頻度で発生するし、いろいろ操作しないとキーボード入力できる状態に戻らないので、めっちゃストレスが溜まる。</p>
+
+<h2 id="感想まとめ">感想まとめ</h2>
+
+<p>持っている機能は申し分ないのだが、前述の不具合のため執筆時のストレスが高く、使うことは諦めた。code-serverは現在も活発に開発がされており、iPadの使い勝手を改善するための開発も計画されているようなので、今後に期待して継続してウォッチしていきたい。</p>
+</p>
+</div>
+
+        <hr>
+        <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col m4">
+                <p>
+    <a class="blog-title" href="/blog/">
+        owky's blog
+    </a>
+</p>
+<p>
+    <a href="https://github.com/owky">
+        <img src="/blog/assets/img/github.png"
+             class="social-icon">owky
+    </a>
+    <br>
+    <a href="https://twitter.com/owky2413">
+        <img src="/blog/assets/img/twitter.png"
+             class="social-icon">owky2413
+    </a>
+</p>
+
+            </div>
+            <div class="col m8">
+                <small>
+    チームマネジメントとかプロダクトマネジメントとかエンジニアリングマネジメントについて 学んだこと、感じたことを記録に残しています。
+    <br>
+    Team Management / Product Management / Engineering Management / Lean / Agile / Scrum
+</small>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </body>
+</html>
