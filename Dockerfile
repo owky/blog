@@ -4,6 +4,12 @@ COPY Gemfile Gemfile.lock ./
 
 RUN bundle install
 
-WORKDIR /work
+RUN echo 'alias jekyll-serve="jekyll serve -H 0.0.0.0 --drafts"' >> /etc/bash.bashrc
 
-CMD ["jekyll", "serve", "-H", "0.0.0.0"]
+RUN export uid=1000 gid=1000 && \
+echo "jekyll:x:${uid}:${gid}:jekyll::/bin/bash" >> /etc/passwd && \
+echo "jekyll:x:${uid}:" >> /etc/group
+
+USER jekyll
+
+WORKDIR /work
