@@ -4,6 +4,6 @@ COPY Gemfile Gemfile.lock ./
 
 RUN bundle install
 
-WORKDIR /work
+RUN echo 'alias jekyll-serve="jekyll serve -H 0.0.0.0 --drafts"' >> /root/.bashrc
 
-CMD ["jekyll", "serve", "-H", "0.0.0.0"]
+WORKDIR /work
