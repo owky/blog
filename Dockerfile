@@ -13,3 +13,6 @@ echo "jekyll:x:${uid}:" >> /etc/group
 USER jekyll
 
 WORKDIR /work
+
+ENTRYPOINT ["jekyll"]
+CMD ["--help"]
