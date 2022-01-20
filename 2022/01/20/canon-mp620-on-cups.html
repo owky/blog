@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <title>Canon PIXUS MP620プリンターをiPhone / iPad / Chromebookから使う</title>
+
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <link rel="stylesheet" type="text/css" href="https://rawgit.com/outboxcraft/beauter/master/beauter.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/blog/assets/css/my-blog.css"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PCCR1QM5EE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PCCR1QM5EE');
+</script>
+</head>
+
+    <body>
+        <header>
+    <div class="jumbo _high">
+        <p class="_high"><strong>
+            <a class="blog-title" href="/blog/">
+                owky's blog
+            </a>
+        </strong></p>
+    </div>
+</header>
+
+        <div class="container">
+    <h1>Canon PIXUS MP620プリンターをiPhone / iPad / Chromebookから使う</h1>
+    <p class="_low">Jan 20, 2022</p>
+    <p><p>Chrome OSではGoogle Cloud Printか、プリントサーバーを使っての印刷しかできない。
+手元のCanon MP620はGoogle Cloud Printには対応してできないので、プリントサーバーを立てて使えるようにする。
+この方法で、iPhoneやiPadからもプリンタを利用できるようになった。</p>
+
+<ul>
+  <li>Chrom OS : 87.0.4280.109 (Official Build)</li>
+  <li>Server : Ubuntu 20.04.1 LTS</li>
+  <li>Printer : Canon PIXUS MP620</li>
+</ul>
+
+<h2 id="cupsでプリントサーバーを立てる">CUPSでプリントサーバーを立てる</h2>
+
+<p>ubuntuでの作業。</p>
+
+<p>Canonプリンター向けのCUPSバックエンドをインストール。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo apt-get install cups-backend-bjnp
+</code></pre></div></div>
+
+<p><a href="https://qiita.com/taiyodayo/items/02ae998119d4d57bd46d">こちら</a>を参考に、CUPSの設定を変更し、ポート631を開けた。</p>
+
+<p>CUPSのWebコンソールにアクセスする。</p>
+
+<p><code class="language-plaintext highlighter-rouge">http://サーバーのIP:631</code></p>
+
+<p>Webコンソールからプリンタを追加することができる。</p>
+
+<ol>
+  <li><b>“管理”</b>タブ</li>
+  <li><b>“プリンターの追加”</b></li>
+  <li><b>“その他のネットワークプリンター”</b>から「Canon network printer」を選択し<b>“続ける”</b></li>
+  <li><b>“接続”</b>欄に <code class="language-plaintext highlighter-rouge">bjnp://プリンタのIP:8611</code> と入力し<b>“続ける”</b></li>
+  <li><b>“名前”</b>は <code class="language-plaintext highlighter-rouge">MP620</code> とする。ここは任意。</li>
+  <li><b>“このプリンターを共有する”</b>をチェックして<b>“続ける”</b></li>
+  <li><b>“メーカー”</b>は「Canon」を選んで<b>“続ける”</b></li>
+  <li><b>“モデル”</b>は「Canon PIXUS MP620 - CUPS+Gutenprint v5.3.3 (カラー)」を選んで<b>“プリンターの追加”</b></li>
+</ol>
+
+<p>これでubuntuサーバーからの印刷ができるようになる。
+CUPSのWebコンソールからテスト印刷ができる。</p>
+
+<h4 id="プリンタの登録時にプリンタが自動検出される場合もある">※プリンタの登録時に、プリンタが自動検出される場合もある</h4>
+<p>手元の環境では、ファイアウォール (ufw) をOFFにしたら自動検出された。
+自動検出されたものを選ぶと、いろいろ入力の手間が省ける</p>
+
+<h2 id="chromebookからプリントサーバーを利用する">Chromebookからプリントサーバーを利用する</h2>
+
+<p>Chromebookの設定画面から<b>“プリンタの追加”</b>を行う。</p>
+
+<ul>
+  <li>名前
+    <ul>
+      <li>任意</li>
+    </ul>
+  </li>
+  <li>アドレス
+    <ul>
+      <li>プリントサーバーのIP:631</li>
+    </ul>
+  </li>
+  <li>プロトコル
+    <ul>
+      <li>インターネット印刷プロトコル（IPP）</li>
+    </ul>
+  </li>
+  <li>キュー
+    <ul>
+      <li>printers/MP620</li>
+    </ul>
+  </li>
+</ul>
+
+<p>これでChromebookからプリンタが利用できるようになる。</p>
+
+<h4 id="プリントサーバーの認証に失敗する場合がある">※プリントサーバーの認証に失敗する場合がある</h4>
+
+<p>CUPSからのプリンタ登録時に「このプリンターを共有する」をOFFにしていると、以下のエラーが出る。</p>
+
+<p><code class="language-plaintext highlighter-rouge">Returning IPP client-error-not-authorized for Create-Job (ipp://192.168.xx.xx:631/printers/MP620) from 192.168.xx.xx.</code></p>
+
+<h2 id="iphoneやipadでも利用可能">iPhoneやiPadでも利用可能</h2>
+
+<p>プリンタを選択する際にMP620を見つけることができる。</p>
+
+<h2 id="参考文献">参考文献</h2>
+
+<ul>
+  <li><a href="https://qiita.com/taiyodayo/items/02ae998119d4d57bd46d">Ubuntu18で爆速でプリントサーバ立てて iPhone とか Chromebook でも印刷する</a></li>
+  <li><a href="https://www.nemuifukari.com/2018/11/fedora-canon-mp620.html">Linuxで Canon MP620 への無線接続設定</a>
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE5OTc1NjEzMjQsLTE3NDk3MjY1MjNdfQ
+==
+--></li>
+</ul>
+</p>
+</div>
+
+        <hr>
+        <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col m4">
+                <p>
+    <a class="blog-title" href="/blog/">
+        owky's blog
+    </a>
+</p>
+<p>
+    <a href="https://github.com/owky">
+        <img src="/blog/assets/img/github.png"
+             class="social-icon">owky
+    </a>
+    <br>
+    <a href="https://twitter.com/owky2413">
+        <img src="/blog/assets/img/twitter.png"
+             class="social-icon">owky2413
+    </a>
+</p>
+
+            </div>
+            <div class="col m8">
+                <small>
+    チームマネジメントとかプロダクトマネジメントとかエンジニアリングマネジメントについて 学んだこと、感じたことを記録に残しています。
+    <br>
+    Team Management / Product Management / Engineering Management / Lean / Agile / Scrum
+</small>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </body>
+</html>
