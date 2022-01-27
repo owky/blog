@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <title>Embulkを使ってデータをMySQLに投入する環境をDockerで構築する</title>
+
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <link rel="stylesheet" type="text/css" href="https://rawgit.com/outboxcraft/beauter/master/beauter.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/blog/assets/css/my-blog.css"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PCCR1QM5EE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PCCR1QM5EE');
+</script>
+</head>
+
+    <body>
+        <header>
+    <div class="jumbo _high">
+        <p class="_high"><strong>
+            <a class="blog-title" href="/blog/">
+                owky's blog
+            </a>
+        </strong></p>
+    </div>
+</header>
+
+        <div class="container">
+    <h1>Embulkを使ってデータをMySQLに投入する環境をDockerで構築する</h1>
+    <p class="_low">Jan 27, 2022</p>
+    <p><p>ログデータをEmbulkでMySQLにロードし、それをダッシュボードツールで見れるようにするというのを仕事でよくやる。その環境をDockerで構築する、というのを勉強のためにやってみた。</p>
+
+<h2 id="dockerでembulk実行環境を用意する">DockerでEmbulk実行環境を用意する</h2>
+<p>まずはベースとなるコンテナ上でEmbulkをインストールしてみて、上手く行ったらDockerfileを作成するという段取り。</p>
+
+<h3 id="java8のコンテナにembulkをインストールしてみる">java8のコンテナにEmbulkをインストールしてみる</h3>
+
+<p>java8のイメージ</p>
+
+<p>https://hub.docker.com/_/java</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it java:8
+</code></pre></div></div>
+
+<p>java8のコンテナ上でEmbulkをインストールする。
+公式ドキュメントに従う。</p>
+
+<p>https://github.com/embulk/embulk#linux–mac–bsd</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@cf9fb92c44a3:/# curl --create-dirs -o ~/.embulk/bin/embulk -L "https://dl.embulk.org/embulk-latest.jar"
+root@cf9fb92c44a3:/# chmod +x ~/.embulk/bin/embulk
+root@cf9fb92c44a3:/# echo 'export PATH="$HOME/.embulk/bin:$PATH"' &gt;&gt; ~/.bashrc
+root@cf9fb92c44a3:/# source ~/.bashrc
+root@cf9fb92c44a3:/# embulk -v
+Embulk v0.9.14
+(略)
+</code></pre></div></div>
+
+<p>できた！</p>
+
+<h3 id="dockerfileをつくる">Dockerfileをつくる</h3>
+<p>java8のベースイメージに、EmbulkをインストールするDockerfile。
+<code class="language-plaintext highlighter-rouge">$HOME</code>下にパスを通すのが難しかったので、<code class="language-plaintext highlighter-rouge">/usr/local/bin</code>に実行ファイルを置くようにした。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM java:8
+
+# embulk
+RUN curl --create-dirs -o /usr/local/bin/embulk -L "https://dl.embulk.org/embulk-latest.jar" &amp;&amp;\
+    chmod +x /usr/local/bin/embulk
+</code></pre></div></div>
+
+<p>buildして確かめる。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build -t embulk-test .
+$ docker run -it embulk-test
+</code></pre></div></div>
+
+<p>Embulkの動作確認。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@c5a6629627d1:/# embulk -v
+Embulk v0.9.14
+(略)
+</code></pre></div></div>
+
+<p>できた！</p>
+
+<h2 id="mysqlをdockerで立てる">MySQLをDockerで立てる</h2>
+<p>MySQLは公式のイメージをそのまま使う。</p>
+
+<p>https://hub.docker.com/_/mysql</p>
+
+<ul>
+  <li>ホスト側のポートは13306を割り当てた</li>
+  <li>mysqlクライアントが古いので認証方式を<code class="language-plaintext highlighter-rouge">mysql_native_password</code>にした</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --name mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d -p 13306:3306 mysql mysqld --default-authentication-plugin=mysql_native_password
+</code></pre></div></div>
+
+<p>手元から接続できるか試す。
+すぐに試すと、まだコンテナ側でMySQLが立ち上がってない場合があり、以下のエラーが出る。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERROR 2013 (HY000): Lost connection to MySQL server at 'reading initial communication packet', system error: 0
+</code></pre></div></div>
+
+<p>ちょっと待てば大丈夫。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mysql -u root -p -h 127.0.0.1 -P 13306
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.15 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql&gt;
+</code></pre></div></div>
+
+<p>できた！</p>
+
+<h2 id="embulk--mysql-のコンテナ間通信">Embulk → MySQL のコンテナ間通信</h2>
+<p>Dockerのネットワーク設定を作成し、そのネットワークを使うように docker run する。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network create my-network
+$ docker run --name embulk --network my-network -it embulk-test
+$ docker run --name mysql --network my-network -e MYSQL_ROOT_PASSWORD=my-secret-pw -p 13306:3306 -d mysql mysqld --default-authentication-plugin=mysql_native_password
+</code></pre></div></div>
+
+<p>EmbulkコンテナからMySQLコンテナにpingしてみる。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@be9157abefa8:/# ping mysql
+PING mysql (172.18.0.3): 56 data bytes
+64 bytes from 172.18.0.3: icmp_seq=0 ttl=64 time=0.129 ms
+64 bytes from 172.18.0.3: icmp_seq=1 ttl=64 time=0.114 ms
+64 bytes from 172.18.0.3: icmp_seq=2 ttl=64 time=0.118 ms
+</code></pre></div></div>
+
+<p>できた！</p>
+
+<h2 id="embulkでmysqlにデータを投入する">EmbulkでMySQLにデータを投入する</h2>
+
+<p>まずはコンテナ上で<code class="language-plaintext highlighter-rouge">embulk-output-mysql</code>プラグインを入れて試す。</p>
+
+<p>https://github.com/embulk/embulk-output-jdbc/tree/master/embulk-output-mysql</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker attach embulk
+root@be9157abefa8:/# embulk gem <span class="nb">install </span>embulk-output-mysql
+</code></pre></div></div>
+
+<p>サンプルデータのconfig.ymlを作成。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@be9157abefa8:/# embulk example ./try1
+root@be9157abefa8:/# embulk guess   ./try1/seed.yml -o config.yml
+</code></pre></div></div>
+
+<p>MySQLに出力するようにconfig.ymlを書き換える。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>out:
+  type: mysql
+  host: mysql
+  user: root
+  password: "my-secret-pw"
+  database: testdb
+  table: sample
+  mode: replace
+</code></pre></div></div>
+
+<p>MySQL側では事前に<code class="language-plaintext highlighter-rouge">CREATE DATABASE</code>しておく。
+実行。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@be9157abefa8:/# embulk run config.yml
+</code></pre></div></div>
+
+<p>結果の確認。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mysql -u root -p -h 127.0.0.1 -P 13306
+mysql&gt; use testdb
+mysql&gt; SELECT * FROM sample;
++------+---------+---------------------+---------------------+----------------------------+
+| id   | account | time                | purchase            | comment                    |
++------+---------+---------------------+---------------------+----------------------------+
+|    1 |   32864 | 2015-01-27 19:23:49 | 2015-01-27 00:00:00 | embulk                     |
+|    2 |   14824 | 2015-01-27 19:01:23 | 2015-01-27 00:00:00 | embulk jruby               |
+|    3 |   27559 | 2015-01-28 02:20:02 | 2015-01-28 00:00:00 | Embulk "csv" parser plugin |
+|    4 |   11270 | 2015-01-29 11:54:36 | 2015-01-29 00:00:00 | NULL                       |
++------+---------+---------------------+---------------------+----------------------------+
+4 rows in set (0.00 sec)
+</code></pre></div></div>
+
+<p>入った！</p>
+
+<h2 id="今後やること">今後やること</h2>
+<ul>
+  <li>Embulkコンテナはあくまで実行環境として、投入データの配置やconfig.ymlの編集はホスト側でできるようにする</li>
+  <li>MySQLのデータを永続化する</li>
+  <li>ダッシュボードツールの環境もDockerで構築</li>
+</ul>
+
+<h2 id="参考文献">参考文献</h2>
+<ul>
+  <li>https://qiita.com/pottava/items/452bf80e334bc1fee69a</li>
+  <li>http://docs.docker.jp/v1.12/engine/userguide/eng-image/dockerfile_best-practice.html#env</li>
+  <li>https://stackoverflow.com/questions/49019652/not-able-to-connect-to-mysql-docker-from-local</li>
+  <li>https://knowledge.sakura.ad.jp/16082/</li>
+</ul>
+
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTEwMTAyMTE5NDAsMTY1MTE4NDQyOCwtMT
+k1MjM0MDY5OF19
+-->
+</p>
+</div>
+
+        <hr>
+        <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col m4">
+                <p>
+    <a class="blog-title" href="/blog/">
+        owky's blog
+    </a>
+</p>
+<p>
+    <a href="https://github.com/owky">
+        <img src="/blog/assets/img/github.png"
+             class="social-icon">owky
+    </a>
+    <br>
+    <a href="https://twitter.com/owky2413">
+        <img src="/blog/assets/img/twitter.png"
+             class="social-icon">owky2413
+    </a>
+</p>
+
+            </div>
+            <div class="col m8">
+                <small>
+    チームマネジメントとかプロダクトマネジメントとかエンジニアリングマネジメントについて 学んだこと、感じたことを記録に残しています。
+    <br>
+    Team Management / Product Management / Engineering Management / Lean / Agile / Scrum
+</small>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </body>
+</html>
