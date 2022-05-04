@@ -1,9 +1,23 @@
-# $ SLACK_APP_TOKEN=`cat SLACK_APP_TOKEN`
-# $ SLACK_BOT_TOKEN=`cat SLACK_BOT_TOKEN`
+# $ export SLACK_APP_TOKEN=`cat SLACK_APP_TOKEN`
+# $ export SLACK_BOT_TOKEN=`cat SLACK_BOT_TOKEN`
 
 require 'sardonyx_ring'
+require 'erb'
 
 class HappyBot < SardonyxRing::App
+  def test
+    channel = "C02SFS6GL2G"
+    thread_ts = "1651472607.682149"
+
+    File.open("_posts/2022-05-03-remote-management-essence.md", "w") do |file|
+      file.puts build(channel, thread_ts)
+    end
+
+    `git add _posts/2022-05-03-remote-management-essence.md`
+    `git commit -m "Blog post. 2022-05-03-remote-management-essence.md"`
+    `git push origin HEAD`
+  end
+
   event 'app_mention' do |event|
     Thread.start(event) { |e| reply(e.raw_payload.event) }
   end
@@ -12,15 +26,24 @@ class HappyBot < SardonyxRing::App
   def reply(event)
     case event.text
     when /Happy/
-      post("Lucky Smile Yeah !", event.channel, event.thread_ts)
+      post(":cat2: Lucky Smile Yeah !", event.channel, event.thread_ts)
     when /jekyll draft (.+)/
       post(jekyll_draft($1.strip), event.channel, event.thread_ts)
     when /jekyll publish (.+)/
       post(jekyll_publish($1.strip), event.channel, event.thread_ts)
     when /jekyll build/
       post(jekyll_build, event.channel, event.thread_ts)
+    when /check/
+      check(event.channel, event.thread_ts)
+    when /post (.+)/
+      File.open("_posts/#{$1.strip}", "w") do |file|
+        file.puts build(event.channel, event.thread_ts)
+      end
     else
       response = client.conversations_replies(channel: event.channel, ts: event.thread_ts)
+
+      puts "ch: #{event.channel}"
+      puts "ts: #{event.thread_ts}"
 
       document = []
       extract_bot_message(response.messages).each do |msg|
@@ -29,8 +52,7 @@ class HappyBot < SardonyxRing::App
         end
       end
 
-      #      post("meow", event.channel, event.thread_ts)
-      post(document.join("\n\n"), event.channel, event.thread_ts)
+#      post(":cat2: meow", event.channel, event.thread_ts)
     end
   end
 
@@ -54,7 +76,28 @@ class HappyBot < SardonyxRing::App
   end
 
   def post(msg, channel, thread)
-    client.chat_postMessage(text: ":cat2: " + msg, channel: channel, thread_ts: thread)
+    client.chat_postMessage(text: msg, channel: channel, thread_ts: thread)
+  end
+
+  def check(channel, thread_ts)
+    article = build(channel, thread_ts)
+    post(article, channel, thread_ts)
+  end
+
+  def build(channel, thread_ts)
+    thread = client.conversations_replies(channel: channel, ts: thread_ts)
+
+    document = []
+    extract_bot_message(thread.messages).each do |msg|
+      msg.blocks.each do |block|
+        document << RichTextBlock.new(block).convert
+      end
+    end
+
+    blog_title = document.shift
+    blog_body = document.join("\n\n")
+
+    ERB.new(File.read("template.md")).result binding
   end
 end
 
@@ -85,13 +128,16 @@ class RichTextElement
       raise
     end
   end
+
+  private
+  def concat_text(messages)
+    messages.map { |msg| msg.text.strip }.join
+  end
 end
 
 class Section < RichTextElement
   def convert
-    @rich_text_object.elements.map do |e|
-      e.text
-    end.join
+    concat_text(@rich_text_object.elements)
   end
 end
 
@@ -99,7 +145,7 @@ class List < RichTextElement
   def convert
     indent = @rich_text_object.indent
     @rich_text_object.elements.map do |e|
-      "    " * indent + "* #{e.elements.first.text.strip}"
+      "    " * indent + "* #{concat_text(e.elements)}"
     end.join("\n")
   end
 end
@@ -138,3 +184,10 @@ HappyBot.new(
   logger: Logger.new($stdout, level: :debug)
 ).socket_start!
 
+=begin
+HappyBot.new(
+  app_token: ENV['SLACK_APP_TOKEN'],
+  bot_token: ENV['SLACK_BOT_TOKEN'],
+  logger: Logger.new($stdout, level: :debug)
+).test
+=end
