@@ -16,8 +16,13 @@
 
     <body>
         {% include header.html %}
-        {{ content }}
-        <hr class="_width50">
+        <div class="row">
+            <div class="col m3 spacer"></div>
+            <div class="col m6">
+                {{ content }}
+            </div>
+            <div class="col m3 spacer"></div>
+        </div>
         {% include footer.html %}
     </body>
 </html>

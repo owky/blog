@@ -25,3 +25,7 @@ footer {
     background: linear-gradient(white, #fff0f3);
     padding-top: 7rem;
 }
+
+.spacer {
+    padding: 1px;
+}
