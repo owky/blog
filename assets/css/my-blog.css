@@ -25,6 +25,9 @@ footer {
     background: linear-gradient(white, #fff0f3);
     padding-top: 7rem;
 }
+code {
+    font-family: SFMono-Regular, Consolas, 'Courier New', 'BIZ UDGothic', Meiryo, monospace;
+}
 
 .spacer {
     padding: 1px;
