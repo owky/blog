@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <title>レビュープロセスがどうしてしんどいのかをSECIモデルで理解する</title>
+
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <link rel="stylesheet" type="text/css" href="https://rawgit.com/outboxcraft/beauter/master/beauter.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/blog/assets/css/my-blog.css"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PCCR1QM5EE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PCCR1QM5EE');
+</script>
+</head>
+
+    <body>
+        <header>
+    <div class="jumbo _high">
+        <p class="_high"><strong>
+            <a class="blog-title" href="/blog/">
+                owky's blog
+            </a>
+        </strong></p>
+    </div>
+</header>
+
+        <div class="row">
+            <div class="col m3 spacer"></div>
+            <div class="col m6">
+                <h1>レビュープロセスがどうしてしんどいのかをSECIモデルで理解する</h1>
+<p class="_low">Feb 21, 2023</p>
+<p><p>開発成果物のレビュープロセスがしんどい。</p>
+
+<p>ユーザーを多く抱える成熟期のサービスを開発している。BtoBのサービスであり、販路や会社間の関係性などふまえてステークホルダーが多かったり、ユーザーにしてもサービス購入者と利用者が異なるなど、複雑な事情を抱える。多くのユーザーやステークホルダーに受け入れられる変更を加えるには、気にしないといけないことがたくさんある。そのため十分な品質を得るためには、ユーザーやステークホルダーについて深いナレッジを持つ製品企画やカスタマーサポートといった<strong>有識者</strong>の協力が必要になる。開発チームによる成果物を、有識者がレビューするプロセスをとっている。このレビューのプロセスが、レビュイーとレビュアーの両者にとってしんどいものとなっており、コストもかかるしスピードも落としてしまっている。</p>
+
+<p>レビューによって問題は見つけられているので、その効果は得られている。しかしレビューされる方は手戻りや追加作業が生まれるのでしんどいし、レビューする方も労力をかけてたくさん指摘を出しており、やはりしんどい。長く取り組みは続けているがなかなかレビュー指摘が減らない状況だ。本来はレビューを続けていれば、指摘は減ってくるだろうと考えていたが、そうなっていない。レビューする方は「いい加減学んでくれ」と思っているだろう。レビューされる方もサボっているわけではない。個人の資質の問題ではなく、組織的なナレッジマネジメントの問題である。</p>
+
+<p>組織的なナレッジマネジメントの問題であれば<a href="https://owky.github.io/blog/2022/12/27/seci-model.html">SECIモデル</a>で考えることができそうだ。
+成果物のレビューは関係者で知識を持ち寄り価値を生み出す作業だ。これは<strong>連結化</strong>に当たる。
+製品企画やカスタマーサポートは、普段の業務からユーザーと接し、ユーザーが求めるものの理解を深めている。これは<strong>内面化</strong>に当たる。
+<strong>共同化</strong>と<strong>表出化</strong>はそれに当たるプロセスや取り組みがない。
+つまり、SECIモデルによる知識創造のサイクルには分断が起こっている。
+レビューを重ねても指摘が無くならない原因は、組織的な知識創造が機能していないことにある。
+個人レベルではユーザー理解が進んでいるが、組織レベルでは学習が機能していないため、開発チームと有識者との間で知識のギャップが拡がっていく。このギャップの大きさがレビューのしんどさに現れる。
+共同化や表出化の過程がないため、開発チームはレビューにより得た暗黙知を形式知に変換できない。そのためにレビューを受けて得た知見を他の場面で応用できず、レビュー指摘が減らない。</p>
+
+<p>これまでも「開発者もユーザーと話した方がいいのでは？」「有識者を交えて勉強会をした方がいいのでは？」みたいな課題は直感的に持っていたが、SECIモデルを通して考えてみることで、それは共同化や表出化を促す取り組みなのだと理解できた。
+共同化や表出化を促す取り組みが必要であると考えてみると、他にもやってみたい施策の案は出てくる。
+手始めに、ユーザーが持つ価値観や業務を、製品企画から開発チームに実例付きで紹介してもらう取り組みを始めてみた。</p>
+</p>
+
+            </div>
+            <div class="col m3 spacer"></div>
+        </div>
+        <footer>
+    <div class="row">
+        <div class="col m3 spacer"></div>
+        <div class="col m6">
+            <div class="row">
+                <div class="col m4">
+                    <p>
+    <a class="blog-title" href="/blog/">
+        owky's blog
+    </a>
+</p>
+<p>
+    <a href="https://github.com/owky">
+        <img src="/blog/assets/img/github.png"
+             class="social-icon">owky
+    </a>
+    <br>
+    <a href="https://twitter.com/owky2413">
+        <img src="/blog/assets/img/twitter.png"
+             class="social-icon">owky2413
+    </a>
+</p>
+
+                </div>
+                <div class="col m8">
+                    <small>
+    チームマネジメントとかプロダクトマネジメントとかエンジニアリングマネジメントについて 学んだこと、感じたことを記録に残しています。
+    <br>
+    Team Management / Product Management / Engineering Management / Lean / Agile / Scrum
+</small>
+
+                </div>
+            </div>
+        </div>
+        <div class="col m3 spacer"></div>
+    </div>
+</footer>
+
+    </body>
+</html>

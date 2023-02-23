@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>https://owky.github.io/blog/jekyll/update/2021/08/25/welcome-to-jekyll.html</loc>
-<lastmod>2021-08-25T02:32:26+00:00</lastmod>
-</url>
-<url>
 <loc>https://owky.github.io/blog/2021/08/29/delegate-project-management.html</loc>
 <lastmod>2021-08-29T00:00:00+00:00</lastmod>
 </url>
@@ -57,10 +53,6 @@
 <lastmod>2022-01-27T00:00:00+00:00</lastmod>
 </url>
 <url>
-<loc>https://owky.github.io/blog/2022/04/04/my-car-1st-choice.html</loc>
-<lastmod>2022-04-04T00:00:00+00:00</lastmod>
-</url>
-<url>
 <loc>https://owky.github.io/blog/2022/05/04/remote-management-essence.html</loc>
 <lastmod>2022-05-04T00:00:00+00:00</lastmod>
 </url>
@@ -87,6 +79,10 @@
 <url>
 <loc>https://owky.github.io/blog/2022/12/27/seci-model.html</loc>
 <lastmod>2022-12-27T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://owky.github.io/blog/2023/02/21/hard-review-process-and-seci-model.html</loc>
+<lastmod>2023-02-21T00:00:00+00:00</lastmod>
 </url>
 <url>
 <loc>https://owky.github.io/blog/</loc>
