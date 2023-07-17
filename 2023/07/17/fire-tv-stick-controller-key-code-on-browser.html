@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <title>FireTVリモコンのKeyCode</title>
+
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <link rel="stylesheet" type="text/css" href="https://rawgit.com/outboxcraft/beauter/master/beauter.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/blog/assets/css/my-blog.css"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PCCR1QM5EE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PCCR1QM5EE');
+</script>
+</head>
+
+    <body>
+        <header>
+    <div class="jumbo _high">
+        <p class="_high"><strong>
+            <a class="blog-title" href="/blog/">
+                owky's blog
+            </a>
+        </strong></p>
+    </div>
+</header>
+
+        <div class="row">
+            <div class="col m3 spacer"></div>
+            <div class="col m6">
+                <h1>FireTVリモコンのKeyCode</h1>
+<p class="_low">Jul 17, 2023</p>
+<p><p>Fire TV StickのSilkブラウザーで自作のWebアプリを表示させた場合に、リモコンでの操作が面倒だった。
+リモコン入力の操作に最適化するために入力イベントを拾ってみようと思って調べてみた。</p>
+
+<p>なお、ブラウザの操作モードが「空間ナビゲーション」になってないと方向キー系は取得できないので注意。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>ボタン</th>
+      <th>key</th>
+      <th>keyCode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>方向キー 上</td>
+      <td>ArrowUp</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <td>方向キー 下</td>
+      <td>ArrowDown</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <td>方向キー 左</td>
+      <td>ArrowLeft</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <td>方向キー 右</td>
+      <td>ArrowRight</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <td>選択</td>
+      <td>Enter</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>再生/一時停止</td>
+      <td>MediaPlayPause</td>
+      <td>179</td>
+    </tr>
+    <tr>
+      <td>巻き戻し</td>
+      <td>MediaRewind</td>
+      <td>227</td>
+    </tr>
+    <tr>
+      <td>早送り</td>
+      <td>MediaFastForward</td>
+      <td>228</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>公式情報にある通り！<br />
+<a href="https://developer.amazon.com/ja/docs/fire-tv/supporting-controllers-in-web-apps.html">ウェブアプリのコントローラー対応 Amazon Fire TV</a></p>
+</p>
+
+            </div>
+            <div class="col m3 spacer"></div>
+        </div>
+        <footer>
+    <div class="row">
+        <div class="col m3 spacer"></div>
+        <div class="col m6">
+            <div class="row">
+                <div class="col m4">
+                    <p>
+    <a class="blog-title" href="/blog/">
+        owky's blog
+    </a>
+</p>
+<p>
+    <a href="https://github.com/owky">
+        <img src="/blog/assets/img/github.png"
+             class="social-icon">owky
+    </a>
+    <br>
+    <a href="https://twitter.com/owky2413">
+        <img src="/blog/assets/img/twitter.png"
+             class="social-icon">owky2413
+    </a>
+</p>
+
+                </div>
+                <div class="col m8">
+                    <small>
+    チームマネジメントとかプロダクトマネジメントとかエンジニアリングマネジメントについて 学んだこと、感じたことを記録に残しています。
+    <br>
+    Team Management / Product Management / Engineering Management / Lean / Agile / Scrum
+</small>
+
+                </div>
+            </div>
+        </div>
+        <div class="col m3 spacer"></div>
+    </div>
+</footer>
+
+    </body>
+</html>
