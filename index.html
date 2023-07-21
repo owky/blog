@@ -2,7 +2,7 @@
 layout: default
 title: owky's blog
 ---
-{% for post in site.posts %}
+{% for post in site.categories.diary %}
 <p>
     <small>
         {{ post.date | date: "%b %-d, %Y" }}
@@ -11,5 +11,6 @@ title: owky's blog
     <a href="{{ post.url | relative_url }}">
         {{ post.title }}
     </a>
+    <p>{{ post.content }}</p>
 </p>
 {% endfor %}
