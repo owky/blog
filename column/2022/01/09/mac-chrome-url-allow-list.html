@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ja">
     <head>
-        <title></title>
+        <title>macでChromeから外部アプリを開く際の確認ダイアログを出さないように設定する</title>
 
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -32,26 +32,46 @@
         <div class="row">
             <div class="col m2 spacer"></div>
             <div class="col m8">
-                <style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-</style>
+                <h1>macでChromeから外部アプリを開く際の確認ダイアログを出さないように設定する</h1>
+<p class="_low">Jan 9, 2022</p>
+<p><p>ブラウザからアプリを呼び出すときに、確認ダイアログが毎回出るのがうるさいのでOFFにしたい。</p>
 
-<div class="container">
-  <h1>404</h1>
+<blockquote>
+  <p>Notionを開きますか？
+ウェブサイトがこのアプリケーションを開く許可を求めています。</p>
+</blockquote>
 
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
-</div>
+<p><img src="https://res.cloudinary.com/owky/image/upload/w_500/v1641729463/34DC5F20-AED5-4DAB-AD0E-C24D677B66C1_sqwubm.jpg" alt="確認ダイアログ" /></p>
+
+<p>こういうやつを二度と表示しないようにしたい。</p>
+
+<h2 id="chromeのポリシー設定で制御できる">Chromeのポリシー設定で制御できる</h2>
+
+<p><a href="https://chromeenterprise.google/policies/#URLAllowlist">Chrome Enterprise のポリシーリストと管理 URLAllowlist</a></p>
+
+<blockquote>
+  <p>また、このポリシーでは、リストで指定したプロトコル（「tel:」、「ssh:」など）のプロトコル ハンドラとして登録されている外部アプリケーションをブラウザから自動で呼び出すことも許可できます。</p>
+</blockquote>
+
+<p>URLAllowlistというポリシーで設定を入れてやればよい。</p>
+
+<h2 id="macではdefaultsコマンドで設定する">macではdefaultsコマンドで設定する</h2>
+
+<p>ターミナルから以下のように設定する。
+Notionを設定する例。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ defaults write com.google.Chrome URLAllowlist -array "notion://*"
+</code></pre></div></div>
+<p>Chromeで <code class="language-plaintext highlighter-rouge">chrome://policy/</code> を開くと反映されているポリシーを確認できる。</p>
+
+<p><img src="https://res.cloudinary.com/owky/image/upload/w_700/v1641729464/7051CF3B-F580-4B7D-BB91-0F40167B95F8_er7u6z.jpg" alt="ポリシーの確認" />
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTc0MDQ5Njc5NSwxOTQ3MzEwNzU4LDEwMD
+YyMDkyMjNdfQ==
+--></p>
+</p>
+<p class="_alignRight">
+    <a href="/blog/columns">→ Columns</a>
+</p>
 
             </div>
             <div class="col m2 spacer"></div>

@@ -19,7 +19,6 @@ img.social-icon {
 }
 header {
     background: linear-gradient(#fff0f3, white);
-    margin-bottom: 3rem;
 }
 footer {
     background: linear-gradient(white, #fff0f3);
@@ -31,4 +30,17 @@ code {
 
 .spacer {
     padding: 1px;
+}
+
+.diary-title {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    column-gap: 10px;
+    margin-bottom: 10px;
+    margin-top: 50px;
+}
+
+@media(min-width: 600px){
+    .diary-title { grid-template-columns: 1fr 11fr;}
 }

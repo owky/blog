@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <title>開発計画とその進捗管理、そして開発チームに求めること</title>
+
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <link rel="stylesheet" type="text/css" href="https://rawgit.com/outboxcraft/beauter/master/beauter.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/blog/assets/css/my-blog.css"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PCCR1QM5EE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PCCR1QM5EE');
+</script>
+</head>
+
+    <body>
+        <header>
+    <div class="jumbo _high" style="padding-bottom: 0px;">
+        <strong class="_high">
+            <a class="blog-title" href="/blog/">
+                owky's blog
+            </a>
+        </strong>
+    </div>
+</header>
+
+        <div class="row">
+            <div class="col m2 spacer"></div>
+            <div class="col m8">
+                <h1>開発計画とその進捗管理、そして開発チームに求めること</h1>
+<p class="_low">Sep 19, 2021</p>
+<p><p>開発計画の管理を開発チームに権限委譲するにあたって、いろいろと考えを整理した。
+これは私のチームの、我々のプロダクトのやり方であるので一般的なベストプラクティスとは限らない。</p>
+
+<ul>
+  <li>開発計画とその進捗管理とは何なのか</li>
+  <li>段階的に詳細化しアジャイルに管理すること</li>
+  <li>開発チームのスプリントへの向き合い方として求めること</li>
+</ul>
+
+<h2 id="開発計画とその進捗管理">開発計画とその進捗管理</h2>
+
+<p>開発チームは、プロダクトが生み出す価値をユーザーが実際に享受できる形で実現することを責務として負う。</p>
+
+<p><strong>開発計画</strong>とは、その価値がいつデリバリーされるかというコミットメントである。
+プロダクトのビジネス戦略と開発計画は密接な関係を持ち、開発計画を前提にビジネスは進むし、ビジネス戦略が変われば開発計画も変更する。
+ビジネス戦略と開発計画のどちらとも、柔軟性を持つ必要があるし、その進捗は繰り返し評価されるべきだ。</p>
+
+<p><strong>開発計画の進捗確認</strong>とは、計画の達成に向けて開発が順調に進んでいるのかを客観的に評価することである。
+あとどれくらいでゴールに着くか？なので、「時間 ＝ 道のり ÷ 速さ」と同じように考えられる。</p>
+
+<p>時間 → あとどれくらいで予定した開発が終わるか<br />
+道のり → 予定した開発が完了するまでの全タスク量<br />
+速さ → 1スプリントあたりのベロシティ</p>
+
+<p>道のりと速さで進捗の評価は決まるので、道のりと速さの妥当性は繰り返し確かめる。</p>
+
+<ul>
+  <li>予定しているタスクは本当に全部なのか？</li>
+  <li>見直した方がよい見積りはないか？</li>
+  <li>ベロシティは安定しているか？</li>
+</ul>
+
+<h2 id="段階的に詳細化しアジャイルに管理する">段階的に詳細化しアジャイルに管理する</h2>
+
+<p>開発計画は、その解像度が段階的に高くなるように、4つのスコープに分けて管理する。</p>
+
+<ul>
+  <li>年間計画 (1年のスコープ)</li>
+  <li>バージョン (2〜4ヶ月のスコープ)</li>
+  <li>機能 (2週間〜2ヶ月のスコープ)</li>
+  <li>スプリント (1〜2週間のスコープ)</li>
+</ul>
+
+<p>スプリントの計画は最も解像度が高く信頼できるものである。
+そしてその実績は、より解像度の低いスコープの計画(機能・バージョン・年間)を見直すための材料となる。</p>
+
+<p>2週間のスプリントで予定した作業が予定通りに終わらなかった場合、現在の計画は理想的な進捗を期待し過ぎているかもしれない。また、新しく使う技術の調査を行ったところ懸念点が解消されたという場合、大きめにしていた見積もりを見直すことで、より早く機能を届けられる計画となる。</p>
+
+<p>実績から得た学びを計画にフィードバックしていく。</p>
+
+<h2 id="開発チームのスプリントへの向き合い方">開発チームのスプリントへの向き合い方</h2>
+
+<p>スプリントにおける作業は、開発チームにとって扱いやすいサイズに細分化されている。
+そのため、開発チームにはスプリントの計画とその達成についてコミットメントを求める。
+具体的には</p>
+
+<ul>
+  <li>ベロシティを安定させること</li>
+  <li>見積もりに自信が無いものから進めること</li>
+</ul>
+
+<p>を考えながら開発に取り組んでほしい。</p>
+
+<p>ベロシティが安定しているというのは、チームが一定の走さで走り続けることができるということなので「時間 ＝ 道のり ÷ 速さ」で求めた計画の精度が高くなる。
+より速く走る(ベロシティを上げる)にはどうするか？と考えたくなるかもしれないが、そうではなく、一定のペースで走ることを阻害する要因を排除することを考えてほしい。
+そうすると、今よりも速いペースで走れるようになる。</p>
+
+<p>見積もりに自信が無い作業には不確実性が隠れている。あまり触ったことがないモジュールを修正するので思ったより時間がかかるかもしれないとか、この機能はテストをするのに特別なツールが必要だがその使い方に手間取るかもしれないとか。こういうものは計画の達成におけるリスクになるので、早く対処できるほど計画の達成確率は上がる。後回しにしたりすると取り返しのつかない状況に追い込まれたりする(休日出勤してのリカバリとか)。このような不確実性を効率よく解消する方法は、さっさとその作業に取り掛かることである。</p>
+</p>
+<p class="_alignRight">
+    <a href="/blog/columns">→ Columns</a>
+</p>
+
+            </div>
+            <div class="col m2 spacer"></div>
+        </div>
+        <footer>
+    <div class="row">
+        <div class="col m2 spacer"></div>
+        <div class="col m8">
+            <div class="row">
+                <div class="col m4">
+                    <p>
+    <a class="blog-title" href="/blog/">
+        owky's blog
+    </a>
+</p>
+<p>
+    <a href="https://github.com/owky">
+        <img src="/blog/assets/img/github.png"
+             class="social-icon">owky
+    </a>
+    <br>
+    <a href="https://twitter.com/owky2413">
+        <img src="/blog/assets/img/twitter.png"
+             class="social-icon">owky2413
+    </a>
+</p>
+
+                </div>
+                <div class="col m8">
+                    <small>
+    チームマネジメントとかプロダクトマネジメントとかエンジニアリングマネジメントについて 学んだこと、感じたことを記録に残しています。
+    <br>
+    Team Management / Product Management / Engineering Management / Lean / Agile / Scrum
+</small>
+
+                </div>
+            </div>
+        </div>
+        <div class="col m2 spacer"></div>
+    </div>
+</footer>
+
+    </body>
+</html>
