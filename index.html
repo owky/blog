@@ -6,14 +6,19 @@ title: owky's blog
     <a href="{{ site.baseurl }}columns">→ Columns</a>
 </p>
 {% for post in site.categories.diary %}
-<p>
-    <small>
-        {{ post.date | date: "%b %-d, %Y" }}
-    </small>
-    <br>
-    <a href="{{ post.url | relative_url }}">
-        {{ post.title }}
-    </a>
-    <p>{{ post.content }}</p>
-</p>
+
+    <div class="diary-title">
+        <div style="text-align: center;">
+            <div style="font-size: 2em;">{{ post.date | date: "%d" }}</div>
+            <div class="_low" style="margin-top: -1em;">{{ post.date | date: "%B" }}</div>
+        </div>
+        <div class="_high">
+            <a href="{{ post.url | relative_url }}">
+                {{ post.title }}
+            </a>
+        </div>
+    </div>
+    {{ post.content }}
+    <p class="_alignRight">{{ post.date | date_to_long_string }}</p>
+
 {% endfor %}
