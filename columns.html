@@ -1,11 +1,12 @@
 ---
 layout: default
 title: owky's blog
+permalink: columns
 ---
 <p class="_alignRight">
-    <a href="{{ site.baseurl }}columns">→ Columns</a>
+    <a href="{{ site.baseurl }}">→ Diary</a>
 </p>
-{% for post in site.categories.diary %}
+{% for post in site.categories.column %}
 <p>
     <small>
         {{ post.date | date: "%b %-d, %Y" }}
@@ -14,6 +15,5 @@ title: owky's blog
     <a href="{{ post.url | relative_url }}">
         {{ post.title }}
     </a>
-    <p>{{ post.content }}</p>
 </p>
 {% endfor %}
